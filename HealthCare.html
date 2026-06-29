@@ -1,513 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HealthCare+ | Premium Medical Services</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare+ | Full Features</title>
+    <style>
+        /* --- CSS RESET & VARIABLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
 
-    :root {
-      --primary: #0284c7;
-      --primary-dark: #0369a1;
-      --primary-glow: rgba(2, 132, 199, 0.15);
-      --accent: #f43f5e;
-      --accent-hover: #e11d48;
-      --text-dark: #0f172a;
-      --text-muted: #64748b;
-      --bg-light: #f8fafc;
-      --radius: 16px;
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #e0f7fa;
+            --text-dark: #333;
+            --text-light: #666;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+        body {
+            background-color: #f8f9fa;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
 
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg-light);
-      color: var(--text-dark);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+        /* --- NAVIGATION BAR --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-    /* Modern, Scrolled-State Header */
-    header {
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      transition: var(--transition);
-      border-bottom: 1px solid rgba(241, 245, 249, 0.6);
-    }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    header.scrolled {
-      background: white;
-      box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08);
-      border-bottom-color: #e2e8f0;
-    }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
 
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      transition: var(--transition);
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
 
-    header.scrolled .nav-container {
-      padding: 12px 20px;
-    }
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
 
-    .logo {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--text-dark);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+        /* Hamburger Menu (Hidden on Desktop) */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
 
-    .logo span {
-      color: var(--primary);
-    }
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #b2ebf2 100%);
+            padding: 6rem 5%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+        }
 
-    nav {
-      display: flex;
-      gap: 30px;
-      align-items: center;
-    }
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
 
-    nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: var(--transition);
-      position: relative;
-    }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
 
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--primary);
-      transition: var(--transition);
-    }
+        .btn {
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            color: var(--white);
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: bold;
+        }
 
-    nav a:hover {
-      color: var(--primary);
-    }
+        .btn:hover {
+            background-color: #004494;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,86,179,0.3);
+        }
 
-    nav a:hover::after {
-      width: 100%;
-    }
+        /* --- SERVICES SECTION --- */
+        .services-section {
+            padding: 5rem 5%;
+            text-align: center;
+        }
 
-    /* Animated Cinematic Hero Section */
-    .hero {
-      padding: 120px 20px 140px;
-      background: radial-gradient(circle at 80% 20%, #e0f2fe 0%, transparent 50%),
-                  radial-gradient(circle at 10% 80%, #ffe4e6 0%, transparent 40%),
-                  #f8fafc;
-      position: relative;
-      overflow: hidden;
-      text-align: center;
-    }
+        .services-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 70%, var(--bg-light));
-      pointer-events: none;
-    }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
 
-    .hero-content {
-      max-width: 840px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
+        .service-card {
+            background-color: var(--white);
+            padding: 2.5rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            border-bottom: 4px solid transparent;
+        }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: white;
-      padding: 6px 16px;
-      border-radius: 100px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--primary);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-      border: 1px solid #e2e8f0;
-      margin-bottom: 24px;
-      animation: float 4s ease-in-out infinite;
-    }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-bottom: 4px solid var(--primary-color);
+        }
 
-    .hero h1 {
-      font-size: 3.8rem;
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 24px;
-      letter-spacing: -0.03em;
-      color: #0f172a;
-    }
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
 
-    .hero h1 span {
-      background: linear-gradient(135deg, var(--primary) 0%, #0369a1 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
 
-    .hero p {
-      font-size: 1.25rem;
-      color: var(--text-muted);
-      margin-bottom: 40px;
-      max-width: 640px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+        .service-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
 
-    /* Premium Interactive CTA Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 36px;
-      border-radius: 100px;
-      font-weight: 700;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: var(--transition);
-      cursor: pointer;
-    }
+        /* --- APPOINTMENT MODAL --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
 
-    .btn-accent {
-      background: var(--text-dark);
-      color: white;
-      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3);
-    }
+        .modal-content {
+            background-color: var(--white);
+            padding: 2.5rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: modalFadeIn 0.3s;
+        }
 
-    .btn-accent:hover {
-      background: var(--primary);
-      transform: translateY(-3px);
-      box-shadow: 0 15px 30px -5px rgba(2, 132, 199, 0.4);
-    }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    /* Live Stat Counters */
-    .stats-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      max-width: 600px;
-      margin: 50px auto 0;
-      background: white;
-      padding: 20px;
-      border-radius: 24px;
-      box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
-      border: 1px solid #edf2f7;
-    }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
 
-    .stat-item h3 {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: var(--text-dark);
-    }
+        .close:hover { color: red; }
 
-    .stat-item p {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin: 0;
-    }
+        .form-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
 
-    /* Dynamic Reveal on Scroll Section */
-    .services-section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 100px 20px;
-    }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 60px;
-    }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
 
-    .section-title h2 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--text-dark);
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
-    }
+        /* --- FOOTER --- */
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 2rem 5%;
+        }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
-    }
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
 
-    /* High-Attention Card Redesign */
-    .card {
-      background: white;
-      border-radius: 24px;
-      padding: 40px 30px;
-      text-align: left;
-      transition: var(--transition);
-      border: 1px solid #e2e8f0;
-      position: relative;
-      overflow: hidden;
-    }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: -100%;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                text-align: center;
+                gap: 0;
+                transition: var(--transition);
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
 
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--primary);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: var(--transition);
-    }
+            .nav-links.active {
+                left: 0;
+            }
 
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 30px 50px -10px rgba(15, 23, 42, 0.1);
-      border-color: #cbd5e1;
-    }
+            .nav-links li {
+                padding: 1rem 0;
+                border-top: 1px solid #eee;
+            }
 
-    .card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .card-icon-wrap {
-      width: 60px;
-      height: 60px;
-      background: #f0f9ff;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      margin-bottom: 24px;
-      transition: var(--transition);
-    }
-
-    .card:hover .card-icon-wrap {
-      background: var(--primary);
-      transform: scale(1.05) rotate(5deg);
-    }
-
-    .card h3 {
-      color: var(--text-dark);
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
-
-    .card p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-
-    /* Scroll Animation Utility Classes */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    footer {
-      background: #0f172a;
-      text-align: center;
-      padding: 50px 20px;
-      color: #94a3b8;
-      font-size: 0.95rem;
-      border-top: 1px solid #1e293b;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-
-    /* Responsive Design Updates */
-    @media (max-width: 768px) {
-      .nav-container {
-        padding: 15px 20px;
-      }
-      nav {
-        display: none; /* Can be hooked up to a burger menu */
-      }
-      .hero h1 {
-        font-size: 2.6rem;
-      }
-      .hero {
-        padding: 80px 20px 100px;
-      }
-      .stats-container {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-    }
-  </style>
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
 </head>
 <body>
 
-  <header id="header">
-    <div class="nav-container">
-      <a href="#" class="logo"><span>💙</span> HealthCare+</a>
-      <nav>
-        <a href="#">Home</a>
-        <a href="#">Services</a>
-        <a href="#">Doctors</a>
-        <a href="#">Contact</a>
-      </nav>
-    </div>
-  </header>
+    <nav class="navbar">
+        <a href="#" class="logo">🏥 Healthcare+</a>
+        <div class="hamburger">☰</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#" id="navBookBtn">Book Now</a></li>
+        </ul>
+    </nav>
 
-  <section class="hero">
-    <div class="hero-content">
-      <div class="badge">✨ Next-Generation Medical Care</div>
-      <h1>Quality Healthcare, <br><span>Simplified for Everyone</span></h1>
-      <p>Book instant clinic appointments, consult with top-tier physicians online, and manage all your family's laboratory needs from home.</p>
-      <a href="#" class="btn btn-accent" id="ctaBtn">
-        Book an Appointment Now
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-      </a>
+    <section id="home" class="hero">
+        <h1>Your Health, Our Priority</h1>
+        <p>Providing a clean, accessible, and user-friendly experience for all your healthcare needs. Quality care is just a click away.</p>
+        <button id="heroBookBtn" class="btn">Book an Appointment</button>
+    </section>
 
-      <div class="stats-container">
-        <div class="stat-item">
-          <h3 class="counter" data-target="99">0</h3>
-          <p>Care Rating %</p>
+    <section id="services" class="services-section">
+        <h2>Our Core Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">👨‍⚕️</div>
+                <h3>Expert Doctors</h3>
+                <p>Consult with our top-rated specialists and general physicians online or in-person for personalized care.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💊</div>
+                <h3>Online Pharmacy</h3>
+                <p>Order prescription medicines and over-the-counter health products with swift doorstep delivery.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔬</div>
+                <h3>Lab Tests</h3>
+                <p>Book diagnostic tests and full body checkups from certified laboratories safely from your home.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📅</div>
+                <h3>Appointments</h3>
+                <p>Skip the waiting room. Schedule your clinical visits seamlessly through our smart booking system.</p>
+            </div>
         </div>
-        <div class="stat-item">
-          <h3 class="counter" data-target="150">0</h3>
-          <p>Expert Doctors</p>
+    </section>
+
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary-color);">Book Appointment</h2>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Service Required</label>
+                    <select required>
+                        <option value="" disabled selected>Select a service...</option>
+                        <option value="doctor">Doctor Consultation</option>
+                        <option value="lab">Lab Test</option>
+                        <option value="pharmacy">Pharmacy Inquiry</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Date</label>
+                    <input type="date" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Confirm Booking</button>
+            </form>
         </div>
-        <div class="stat-item">
-          <h3 class="counter" data-target="25">0</h3>
-          <p>Clinics Nearby k+</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <main class="services-section">
-    <div class="section-title reveal">
-      <h2>Our Core Services</h2>
-      <p>Comprehensive medical care tailored to your daily health needs.</p>
     </div>
 
-    <div class="services-grid">
-      <div class="card reveal">
-        <div class="card-icon-wrap">👨‍⚕️</div>
-        <h3>Find a Doctor</h3>
-        <p>Search and instantly connect with verified specialists across various medical fields.</p>
-      </div>
-      <div class="card reveal">
-        <div class="card-icon-wrap">💊</div>
-        <h3>Online Pharmacy</h3>
-        <p>Order prescription medications reliably with direct, climate-controlled doorstep delivery.</p>
-      </div>
-      <div class="card reveal">
-        <div class="card-icon-wrap">🧪</div>
-        <h3>Secure Lab Tests</h3>
-        <p>Schedule home sample collections and view certified digital results securely online.</p>
-      </div>
-      <div class="card reveal">
-        <div class="card-icon-wrap">📅</div>
-        <h3>Easy Scheduling</h3>
-        <p>Coordinate digital tele-consults or physical check-ups seamlessly in seconds.</p>
-      </div>
-    </div>
-  </main>
+    <footer class="footer">
+        <p>&copy; 2026 Healthcare+ Frontend. All rights reserved.</p>
+    </footer>
 
-  <footer>
-    <p>© 2026 HealthCare+. Engineered for modern clinical excellence. All Rights Reserved.</p>
-  </footer>
+    <script>
+        // 1. Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
 
-  <script>
-    // 1. Header scroll visual state modification
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 40) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
 
-    // 2. Scroll Reveal Animations via Intersection Observer
-    const revealElements = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          revealObserver.unobserve(entry.target); // Animates once
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // 2. Modal Logic
+        const modal = document.getElementById('appointmentModal');
+        const heroBtn = document.getElementById('heroBookBtn');
+        const navBtn = document.getElementById('navBookBtn');
+        const closeBtn = document.querySelector('.close');
+
+        // Open modal
+        function openModal(e) {
+            e.preventDefault();
+            modal.style.display = 'flex';
         }
-      });
-    }, { threshold: 0.1 });
 
-    revealElements.forEach(element => revealObserver.observe(element));
+        heroBtn.addEventListener('click', openModal);
+        navBtn.addEventListener('click', openModal);
 
-    // 3. Sequential Counter Increment Animation
-    const counters = document.querySelectorAll('.counter');
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const counter = entry.target;
-          const target = +counter.getAttribute('data-target');
-          const duration = 1500; // Total runtime in ms
-          const stepTime = Math.max(Math.floor(duration / target), 15);
-          
-          let current = 0;
-          const timer = setInterval(() => {
-            current += Math.ceil(target / (duration / stepTime));
-            if (current >= target) {
-              counter.innerText = target + (target === 25 || target === 150 ? '+' : '');
-              clearInterval(timer);
-            } else {
-              counter.innerText = current;
+        // Close modal (X button)
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Close modal (clicking outside)
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
             }
-          }, stepTime);
-          
-          counterObserver.unobserve(counter);
-        }
-      });
-    }, { threshold: 0.5 });
+        });
 
-    counters.forEach(counter => counterObserver.observe(counter));
-
-    // 4. Elastic Micro-interaction for CTA button
-    const ctaBtn = document.getElementById('ctaBtn');
-    ctaBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      ctaBtn.style.transform = 'scale(0.95)';
-      setTimeout(() => {
-        ctaBtn.style.transform = '';
-        alert('Navigating to appointment scheduler booking stream...');
-      }, 150);
-    });
-  </script>
+        // Form Submission Mock
+        document.getElementById('bookingForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Appointment booked successfully! We will contact you soon.');
+            modal.style.display = 'none';
+            e.target.reset(); // Clear the form
+        });
+    </script>
 </body>
 </html>
