@@ -5,14 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HealthCare+ | Premium Medical Services</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
     :root {
       --primary: #0284c7;
-      --primary-hover: #0369a1;
+      --primary-dark: #0369a1;
+      --primary-glow: rgba(2, 132, 199, 0.15);
       --accent: #f43f5e;
       --accent-hover: #e11d48;
       --text-dark: #0f172a;
-      --text-muted: #475569;
+      --text-muted: #64748b;
       --bg-light: #f8fafc;
+      --radius: 16px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     * {
@@ -22,19 +27,29 @@
     }
 
     body {
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       background: var(--bg-light);
       color: var(--text-dark);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    /* Modern, Clean Header/Nav Layout */
+    /* Modern, Scrolled-State Header */
     header {
-      background: white;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
       z-index: 100;
+      transition: var(--transition);
+      border-bottom: 1px solid rgba(241, 245, 249, 0.6);
+    }
+
+    header.scrolled {
+      background: white;
+      box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08);
+      border-bottom-color: #e2e8f0;
     }
 
     .nav-container {
@@ -43,123 +58,198 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 20px;
+      padding: 20px;
+      transition: var(--transition);
+    }
+
+    header.scrolled .nav-container {
+      padding: 12px 20px;
     }
 
     .logo {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 800;
-      color: var(--primary);
+      color: var(--text-dark);
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 8px;
+    }
+
+    .logo span {
+      color: var(--primary);
     }
 
     nav {
       display: flex;
-      gap: 25px;
+      gap: 30px;
       align-items: center;
     }
 
     nav a {
       color: var(--text-muted);
       text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s ease;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
     }
 
     nav a:hover {
       color: var(--primary);
     }
 
-    /* High-Impact Hero Section */
-    .hero {
-      text-align: center;
-      padding: 90px 20px;
-      background: linear-gradient(135deg, #0f172a 0%, #0284c7 100%);
-      color: white;
-      position: relative;
-      overflow: hidden;
+    nav a:hover::after {
+      width: 100%;
     }
 
-    /* Subtle background graphic effect */
+    /* Animated Cinematic Hero Section */
+    .hero {
+      padding: 120px 20px 140px;
+      background: radial-gradient(circle at 80% 20%, #e0f2fe 0%, transparent 50%),
+                  radial-gradient(circle at 10% 80%, #ffe4e6 0%, transparent 40%),
+                  #f8fafc;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
     .hero::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -20%;
-      width: 80%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
-      transform: rotate(-15deg);
+      inset: 0;
+      background: linear-gradient(180deg, transparent 70%, var(--bg-light));
       pointer-events: none;
     }
 
     .hero-content {
-      max-width: 700px;
+      max-width: 840px;
       margin: 0 auto;
       position: relative;
       z-index: 1;
     }
 
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: white;
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+      margin-bottom: 24px;
+      animation: float 4s ease-in-out infinite;
+    }
+
     .hero h1 {
-      font-size: 3rem;
+      font-size: 3.8rem;
       font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 20px;
-      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 24px;
+      letter-spacing: -0.03em;
+      color: #0f172a;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--primary) 0%, #0369a1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .hero p {
-      font-size: 1.15rem;
-      color: #e2e8f0;
-      margin-bottom: 35px;
-      font-weight: 300;
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    /* High-Attention CTA Buttons */
+    /* Premium Interactive CTA Buttons */
     .btn {
-      display: inline-block;
-      padding: 14px 28px;
-      border-radius: 50px;
-      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 1rem;
       text-decoration: none;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+      cursor: pointer;
     }
 
     .btn-accent {
-      background: var(--accent);
+      background: var(--text-dark);
       color: white;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3);
     }
 
     .btn-accent:hover {
-      background: var(--accent-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 15px -3px rgba(244, 63, 94, 0.3);
+      background: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px -5px rgba(2, 132, 199, 0.4);
     }
 
-    /* Services Grid Section */
+    /* Live Stat Counters */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 600px;
+      margin: 50px auto 0;
+      background: white;
+      padding: 20px;
+      border-radius: 24px;
+      box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
+      border: 1px solid #edf2f7;
+    }
+
+    .stat-item h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .stat-item p {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Dynamic Reveal on Scroll Section */
     .services-section {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 80px 20px;
+      padding: 100px 20px;
     }
 
     .section-title {
       text-align: center;
-      margin-bottom: 50px;
+      margin-bottom: 60px;
     }
 
     .section-title h2 {
-      font-size: 2.2rem;
+      font-size: 2.5rem;
+      font-weight: 800;
       color: var(--text-dark);
-      margin-bottom: 10px;
-    }
-
-    .section-title p {
-      color: var(--text-muted);
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
     }
 
     .services-grid {
@@ -168,69 +258,124 @@
       gap: 30px;
     }
 
-    /* Micro-interactions on Cards */
+    /* High-Attention Card Redesign */
     .card {
       background: white;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
-      padding: 35px 25px;
-      text-align: center;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      border: 1px solid #f1f5f9;
+      border-radius: 24px;
+      padding: 40px 30px;
+      text-align: left;
+      transition: var(--transition);
+      border: 1px solid #e2e8f0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--primary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: var(--transition);
     }
 
     .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.1);
-      border-color: #e2e8f0;
+      transform: translateY(-10px);
+      box-shadow: 0 30px 50px -10px rgba(15, 23, 42, 0.1);
+      border-color: #cbd5e1;
     }
 
-    .card-icon {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      display: inline-block;
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card-icon-wrap {
+      width: 60px;
+      height: 60px;
+      background: #f0f9ff;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 24px;
+      transition: var(--transition);
+    }
+
+    .card:hover .card-icon-wrap {
+      background: var(--primary);
+      transform: scale(1.05) rotate(5deg);
     }
 
     .card h3 {
       color: var(--text-dark);
-      font-size: 1.3rem;
-      margin-bottom: 12px;
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 14px;
     }
 
     .card p {
       color: var(--text-muted);
       font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Scroll Animation Utility Classes */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     footer {
       background: #0f172a;
       text-align: center;
-      padding: 40px 20px;
+      padding: 50px 20px;
       color: #94a3b8;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       border-top: 1px solid #1e293b;
     }
 
-    /* Responsive Adjustments */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* Responsive Design Updates */
     @media (max-width: 768px) {
       .nav-container {
-        flex-direction: column;
-        gap: 15px;
+        padding: 15px 20px;
+      }
+      nav {
+        display: none; /* Can be hooked up to a burger menu */
       }
       .hero h1 {
-        font-size: 2.2rem;
+        font-size: 2.6rem;
       }
-      .hero padding {
-        padding: 60px 20px;
+      .hero {
+        padding: 80px 20px 100px;
+      }
+      .stats-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
       }
     }
   </style>
 </head>
 <body>
 
-  <header>
+  <header id="header">
     <div class="nav-container">
-      <a href="#" class="logo">💙 HealthCare+</a>
+      <a href="#" class="logo"><span>💙</span> HealthCare+</a>
       <nav>
         <a href="#">Home</a>
         <a href="#">Services</a>
@@ -242,36 +387,55 @@
 
   <section class="hero">
     <div class="hero-content">
-      <h1>Quality Healthcare, Simplified for Everyone</h1>
+      <div class="badge">✨ Next-Generation Medical Care</div>
+      <h1>Quality Healthcare, <br><span>Simplified for Everyone</span></h1>
       <p>Book instant clinic appointments, consult with top-tier physicians online, and manage all your family's laboratory needs from home.</p>
-      <a href="#" class="btn btn-accent">Book an Appointment Now</a>
+      <a href="#" class="btn btn-accent" id="ctaBtn">
+        Book an Appointment Now
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+
+      <div class="stats-container">
+        <div class="stat-item">
+          <h3 class="counter" data-target="99">0</h3>
+          <p>Care Rating %</p>
+        </div>
+        <div class="stat-item">
+          <h3 class="counter" data-target="150">0</h3>
+          <p>Expert Doctors</p>
+        </div>
+        <div class="stat-item">
+          <h3 class="counter" data-target="25">0</h3>
+          <p>Clinics Nearby k+</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <main class="services-section">
-    <div class="section-title">
+    <div class="section-title reveal">
       <h2>Our Core Services</h2>
       <p>Comprehensive medical care tailored to your daily health needs.</p>
     </div>
 
     <div class="services-grid">
-      <div class="card">
-        <span class="card-icon">👨‍⚕️</span>
+      <div class="card reveal">
+        <div class="card-icon-wrap">👨‍⚕️</div>
         <h3>Find a Doctor</h3>
-        <p>Search and instantly connect with verified specialists across various fields.</p>
+        <p>Search and instantly connect with verified specialists across various medical fields.</p>
       </div>
-      <div class="card">
-        <span class="card-icon">💊</span>
+      <div class="card reveal">
+        <div class="card-icon-wrap">💊</div>
         <h3>Online Pharmacy</h3>
         <p>Order prescription medications reliably with direct, climate-controlled doorstep delivery.</p>
       </div>
-      <div class="card">
-        <span class="card-icon">🧪</span>
+      <div class="card reveal">
+        <div class="card-icon-wrap">🧪</div>
         <h3>Secure Lab Tests</h3>
         <p>Schedule home sample collections and view certified digital results securely online.</p>
       </div>
-      <div class="card">
-        <div class="card-icon">📅</div>
+      <div class="card reveal">
+        <div class="card-icon-wrap">📅</div>
         <h3>Easy Scheduling</h3>
         <p>Coordinate digital tele-consults or physical check-ups seamlessly in seconds.</p>
       </div>
@@ -282,5 +446,68 @@
     <p>© 2026 HealthCare+. Engineered for modern clinical excellence. All Rights Reserved.</p>
   </footer>
 
+  <script>
+    // 1. Header scroll visual state modification
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // 2. Scroll Reveal Animations via Intersection Observer
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          revealObserver.unobserve(entry.target); // Animates once
+        }
+      });
+    }, { threshold: 0.1 });
+
+    revealElements.forEach(element => revealObserver.observe(element));
+
+    // 3. Sequential Counter Increment Animation
+    const counters = document.querySelectorAll('.counter');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = +counter.getAttribute('data-target');
+          const duration = 1500; // Total runtime in ms
+          const stepTime = Math.max(Math.floor(duration / target), 15);
+          
+          let current = 0;
+          const timer = setInterval(() => {
+            current += Math.ceil(target / (duration / stepTime));
+            if (current >= target) {
+              counter.innerText = target + (target === 25 || target === 150 ? '+' : '');
+              clearInterval(timer);
+            } else {
+              counter.innerText = current;
+            }
+          }, stepTime);
+          
+          counterObserver.unobserve(counter);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => counterObserver.observe(counter));
+
+    // 4. Elastic Micro-interaction for CTA button
+    const ctaBtn = document.getElementById('ctaBtn');
+    ctaBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      ctaBtn.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        ctaBtn.style.transform = '';
+        alert('Navigating to appointment scheduler booking stream...');
+      }, 150);
+    });
+  </script>
 </body>
 </html>
